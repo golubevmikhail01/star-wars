@@ -23,11 +23,11 @@ footer {
     height: 5rem;
 }
 
-.f7{
+.rounded-bottom-left {
     border-bottom-left-radius: 2rem;
 }
 
-.f9{
+.rounded-bottom-right {
     border-bottom-right-radius: 2rem;
 }
 
