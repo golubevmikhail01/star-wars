@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {baseURL} from "../utils/constants.js";
 
 const OpeningCrawl = () => {
-    const [openingCrawl, setOpeningCrawl] = useState();
+    const [openingCrawl, setOpeningCrawl] = useState(null);
 
     useEffect(() => {
         const episode = Math.floor(Math.random() * 6) + 1;
