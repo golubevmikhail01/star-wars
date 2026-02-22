@@ -1,29 +1,44 @@
-import {baseURL} from "../utils/constants.js";
+import {baseURL, THIRTY_DAYS} from "../utils/constants.js";
 import {useEffect, useState} from "react";
 import hero from "../assets/main.jpg";
+import {isFresh} from "../utils/functions.js";
 
 const AboutMe = () => {
-    const [aboutMe, setAboutMe] = useState(null);
+    const [aboutMe, setAboutMe] = useState(() => {
+        try {
+            const data = localStorage.getItem('about_me');
+            return data ? JSON.parse(data) : null;
+        } catch {
+            return null;
+        }
+    });
 
     useEffect(() => {
-        const loadData = async () => {
-            try {
-                const res = await fetch(`${baseURL}/v1/peoples/1`);
-                const data = await res.json();
+        if (!aboutMe || !isFresh(aboutMe, THIRTY_DAYS)) {
+            const loadData = async () => {
+                try {
+                    const res = await fetch(`${baseURL}/v1/peoples/1`);
+                    const data = await res.json();
 
-                const planetRes = await fetch(`${baseURL}/v1/planets/${data.homeworld}`);
-                const planet = await planetRes.json();
+                    const planetRes = await fetch(`${baseURL}/v1/planets/${data.homeworld}`);
+                    const planet = await planetRes.json();
 
-                setAboutMe({
-                    ...data,
-                    homeworld: planet.name,
-                });
-            } catch {
-                setAboutMe('Error loading about me');
-            }
-        };
-        loadData();
-    }, [])
+                    const newData = {
+                        ...data,
+                        homeworld: planet.name,
+                        lastUpdateData: Date.now()
+                    };
+
+                    setAboutMe(newData);
+                    localStorage.setItem('about_me', JSON.stringify(newData));
+                } catch {
+                    setAboutMe([]);
+                }
+            };
+
+            loadData();
+        }
+    }, [aboutMe]);
 
     if (aboutMe) {
         return (
