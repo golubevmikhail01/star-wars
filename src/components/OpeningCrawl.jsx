@@ -16,7 +16,6 @@ const OpeningCrawl = () => {
                 })
                 .catch(() => setOpeningCrawl('Error loading opening crawl'))
         }
-
     }, [openingCrawl])
 
     if (openingCrawl) {
