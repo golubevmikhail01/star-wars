@@ -1,6 +1,14 @@
-const NavItem = ({itemTitle, changePage}) => {
+import {useContext} from "react";
+import {SWContext} from "../utils/context.js";
+
+const NavItem = ({itemTitle}) => {
+    const {changePage} = useContext(SWContext);
+
     return (
-        <div onClick={() => changePage(itemTitle)} className={'bg-danger rounded-md px-3 border cursor-pointer hover:bg-red-500 hover:text-white'}>{itemTitle}</div>
+        <div onClick={() => changePage(itemTitle)}
+             className={'bg-danger rounded-md px-3 border cursor-pointer hover:bg-red-500 hover:text-white'}>
+            {itemTitle}
+        </div>
     );
 };
 
