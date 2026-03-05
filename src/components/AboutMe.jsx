@@ -42,9 +42,9 @@ const AboutMe = () => {
 
     if (aboutMe) {
         return (
-            <div className={"d-flex flex-column flex-md-row gap-3 align-items-start mb-2"}>
-                <img className="w-25" src={hero} alt="Luke Skywalker"/>
-                <p className="far-galaxy">
+            <div className={'grid grid-cols-10 my-2 gap-4'}>
+                <img className={'col-span-3 w-full shadow-hero'} src={hero} alt="Luke Skywalker"/>
+                <p className={'col-span-7 col-start-4 text-3xl text-justify leading-normal tracking-widest'}>
                     <b>Name: {aboutMe.name}</b><br/>
                     Birth Year: {aboutMe.birth_year}<br/>
                     Gender: {aboutMe.gender}<br/>
@@ -56,9 +56,9 @@ const AboutMe = () => {
         );
     } else {
         return (
-            <p className="far-galaxy">
-                <span className="spinner-border spinner-border-sm"></span>
-                <span className="spinner-grow spinner-grow-sm">Loading...</span>
+            <p className={'text-3xl text-justify leading-normal tracking-widest flex items-center gap-2'}>
+                <span className={'w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin'}></span>
+                <span>Loading...</span>
             </p>
         );
     }
